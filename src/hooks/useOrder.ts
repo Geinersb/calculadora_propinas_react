@@ -4,6 +4,7 @@ import type { MenuItem, OrderItem } from "../types";
 export default function useOrder() {
   //se declara el state
   const [order, setOrder] = useState<OrderItem[]>([]); //aqui se aplica un generic
+  const [tip, setTip] = useState(0)
 
   const addItem = (item: MenuItem) => {
     const itemExist = order.find((orderItem) => orderItem.id === item.id);
@@ -26,10 +27,18 @@ const removeItem = (id: MenuItem['id']) =>{
 setOrder(order.filter(item => item.id !== id))
 }
 
+const placeOrder = ()=>{
+setOrder ([])
+setTip(0)
+}
+
 
   return {
     order,
+    tip,
+    setTip,
     addItem,
-    removeItem
+    removeItem,
+    placeOrder
   };
 }

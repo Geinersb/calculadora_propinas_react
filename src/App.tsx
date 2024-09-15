@@ -6,8 +6,7 @@ import OrderTotals from "./components/OrderTotals";
 import TipForm from "./components/TipForm";
 
 function App() {
-
-const {order, addItem, removeItem} = useOrder()
+  const { order, addItem, removeItem, tip, setTip, placeOrder  } = useOrder();
 
   return (
     <>
@@ -22,31 +21,33 @@ const {order, addItem, removeItem} = useOrder()
           <h2 className="text-4xl font-black">Menú</h2>
 
           <div className="space-y-3 mt-10">
-
             {menuItems.map((item) => (
-              <MenuItem
-               key={item.id}
-                item={item}
-                addItem={addItem}
-                />
+              <MenuItem key={item.id} item={item} addItem={addItem} />
             ))}
           </div>
         </div>
 
         <div className="border border-dashed border-slate-300 p-5 rounded-lg space-y-10">
-            < OrderContents          
-            order = {order}
-            removeItem = {removeItem}
-            />
+          {order.length > 0 ? (
+<>
+<OrderContents order={order} removeItem={removeItem} />
 
-            <OrderTotals
-              order = {order}
-            />
+          <TipForm
+          setTip={setTip}
+          tip = {tip}
+          />
 
-            <TipForm
-              
-              />
+          <OrderTotals
+           order={order} 
+           tip={tip}
+           placeOrder = {placeOrder}
+           />
+</>
+          ) : (
 
+            <p className="text-center font-bold">La orden esta vacia</p>
+          )}
+          
         </div>
       </main>
     </>
