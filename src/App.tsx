@@ -2,6 +2,8 @@ import MenuItem from "./components/MenuItem";
 import OrderContents from "./components/OrderContents";
 import { menuItems } from "./data/db";
 import useOrder from "./hooks/useOrder";
+import OrderTotals from "./components/OrderTotals";
+import TipForm from "./components/TipForm";
 
 function App() {
 
@@ -20,6 +22,7 @@ const {order, addItem, removeItem} = useOrder()
           <h2 className="text-4xl font-black">Menú</h2>
 
           <div className="space-y-3 mt-10">
+
             {menuItems.map((item) => (
               <MenuItem
                key={item.id}
@@ -36,7 +39,13 @@ const {order, addItem, removeItem} = useOrder()
             removeItem = {removeItem}
             />
 
+            <OrderTotals
+              order = {order}
+            />
 
+            <TipForm
+              
+              />
 
         </div>
       </main>
